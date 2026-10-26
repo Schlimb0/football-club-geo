@@ -1,0 +1,7 @@
+# GeoBaller world query 4b: parent club (P831) and Transfermarkt team ID (P7223). Run on QLever Wikidata.
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+SELECT DISTINCT ?club ?parent_club ?transfermarkt_id WHERE {
+  ?club wdt:P31 ?type . ?type wdt:P279* wd:Q476028 .
+  { ?club wdt:P831 ?parent_club . } UNION { ?club wdt:P7223 ?transfermarkt_id . }
+}

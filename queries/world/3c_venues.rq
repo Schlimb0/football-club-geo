@@ -1,0 +1,11 @@
+# GeoBaller world query 3c: each club's home ground, with its coordinates.
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?club ?venue ?venue_name ?venue_coord WHERE {
+  ?club wdt:P31 ?type . ?type wdt:P279* wd:Q476028 .
+  ?club wdt:P115 ?venue .
+  OPTIONAL { ?venue wdt:P625 ?venue_coord }
+  OPTIONAL { ?venue rdfs:label ?venue_name . FILTER(LANG(?venue_name) = "en") }
+}

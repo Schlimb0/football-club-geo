@@ -1,0 +1,14 @@
+# GeoBaller world query 1 of 4: one row per club and football type, with English name, country and dates.
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?club ?name_en ?type ?type_name ?country ?country_name ?founded ?dissolved WHERE {
+  ?club wdt:P31 ?type . ?type wdt:P279* wd:Q476028 .
+  OPTIONAL { ?club rdfs:label ?name_en . FILTER(LANG(?name_en) = "en") }
+  OPTIONAL { ?type rdfs:label ?type_name . FILTER(LANG(?type_name) = "en") }
+  OPTIONAL { ?club wdt:P17 ?country . OPTIONAL { ?country rdfs:label ?country_name . FILTER(LANG(?country_name) = "en") } }
+  OPTIONAL { ?club wdt:P571 ?founded }
+  OPTIONAL { ?club wdt:P576 ?dissolved }
+}

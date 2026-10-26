@@ -1,0 +1,12 @@
+# GeoBaller world query 2 of 4: club names in other languages (for clubs with no English name). One row per club and language.
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?club ?lang ?name WHERE {
+  ?club wdt:P31/wdt:P279* wd:Q476028 .
+  ?club rdfs:label ?name .
+  BIND(LANG(?name) AS ?lang)
+  FILTER(?lang IN ("de", "fr", "es", "pt", "it", "nl", "mul"))
+}

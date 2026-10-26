@@ -1,0 +1,12 @@
+# GeoBaller world query 4a2: replaced by (mergers), part of (sections of multi-sport clubs), owned by. One row per club, field and value.
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?club ?field ?value ?value_name WHERE {
+  ?club wdt:P31 ?type . ?type wdt:P279* wd:Q476028 .
+  { ?club wdt:P1366 ?value . BIND("replaced_by" AS ?field) }
+  UNION { ?club wdt:P361 ?value . BIND("part_of" AS ?field) }
+  UNION { ?club wdt:P127 ?value . BIND("owned_by" AS ?field) }
+  OPTIONAL { ?value rdfs:label ?value_name . FILTER(LANG(?value_name) = "en") }
+}

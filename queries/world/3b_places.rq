@@ -1,0 +1,11 @@
+# GeoBaller world query 3b: the town / admin area each club is in, with its coordinates.
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?club ?place ?place_name ?place_coord WHERE {
+  ?club wdt:P31 ?type . ?type wdt:P279* wd:Q476028 .
+  ?club wdt:P131 ?place .
+  OPTIONAL { ?place wdt:P625 ?place_coord }
+  OPTIONAL { ?place rdfs:label ?place_name . FILTER(LANG(?place_name) = "en") }
+}

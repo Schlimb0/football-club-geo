@@ -1,0 +1,9 @@
+# GeoBaller world query 3a: the club's own coordinates.
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?club ?coord WHERE {
+  ?club wdt:P31 ?type . ?type wdt:P279* wd:Q476028 .
+  ?club wdt:P625 ?coord .
+}
