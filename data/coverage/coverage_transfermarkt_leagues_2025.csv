@@ -1,0 +1,133 @@
+tm_country,level,competition_name,league_size,in_list,on_map
+Andorra,2.0,LaLiga2,1,1,1
+Australia,1.0,A-League Men,8,8,8
+Austria,1.0,Bundesliga,12,11,11
+Austria,2.0,2. Liga,5,5,5
+Austria,3.0,Regional League Central,1,1,1
+Austria,3.0,Regionalliga West,1,1,1
+Austria,4.0,Salzburger Liga,1,1,1
+Belgium,1.0,Jupiler Pro League,16,16,16
+Belgium,2.0,Challenger Pro League,17,11,7
+Belgium,3.0,1ste Nationale ACFF,5,1,1
+Belgium,3.0,1ste Nationale VV,7,0,0
+Belgium,4.0,2de Nationale ACFF,1,0,0
+Belgium,4.0,2de Nationale VV A,4,1,0
+Belgium,4.0,2de Nationale VV B,4,2,1
+Belgium,5.0,3de Nationale VV B,2,0,0
+Croatia,1.0,SuperSport HNL,10,10,9
+Croatia,2.0,Prva Nogometna Liga,3,3,3
+Czech Republic,1.0,Chance Liga,16,16,16
+Czech Republic,2.0,Chance Narodni Liga,16,7,6
+Czech Republic,3.0,Ceska fotbalova liga,3,2,2
+Czech Republic,3.0,Moravskoslezska fotbalova liga,7,2,2
+Denmark,1.0,Superliga,12,12,12
+Denmark,2.0,1.Division,6,6,6
+Denmark,3.0,2.Division,2,2,2
+England,1.0,Premier League,20,20,20
+England,2.0,Championship,22,22,22
+England,3.0,League One,23,23,23
+England,4.0,League Two,17,17,17
+England,5.0,National League,8,5,5
+France,1.0,Ligue 1,17,17,17
+France,2.0,Ligue 2,18,18,18
+France,3.0,Championnat National,17,17,13
+France,4.0,Championnat National 2 - Groupe A,16,15,9
+France,4.0,Championnat National 2 - Groupe B,16,16,6
+France,4.0,Championnat National 2 - Groupe C,16,16,8
+France,5.0,Championnat National 3 - Groupe A,6,5,2
+France,5.0,Championnat National 3 - Groupe B,5,3,1
+France,5.0,Championnat National 3 - Groupe C,5,4,1
+France,5.0,Championnat National 3 - Groupe D,5,4,2
+France,5.0,Championnat National 3 - Groupe E,8,6,1
+France,5.0,Championnat National 3 - Groupe F,8,6,4
+France,5.0,Championnat National 3 - Groupe G,8,6,3
+France,5.0,Championnat National 3 - Groupe H,6,3,3
+Germany,1.0,Bundesliga,18,18,18
+Germany,2.0,2. Bundesliga,18,18,18
+Germany,3.0,3. Liga,20,19,18
+Germany,4.0,Regionalliga Bayern,5,1,1
+Germany,4.0,Regionalliga Nord,6,3,3
+Germany,4.0,Regionalliga Northeast,6,6,6
+Germany,4.0,Regionalliga Südwest,8,3,3
+Germany,4.0,Regionalliga West,5,3,3
+Germany,5.0,Bayernliga Süd,1,1,1
+Germany,5.0,NOFV-Oberliga Nord,1,1,0
+Germany,5.0,Oberliga Baden-Württemberg,1,1,1
+Germany,5.0,Oberliga Niederrhein,1,1,0
+Germany,5.0,Oberliga Rheinland-Pfalz/Saar,1,0,0
+Germany,5.0,Oberliga Westfalen,1,1,1
+Greece,1.0,Super League 1,14,13,13
+Greece,2.0,Super League 2,5,5,5
+Hungary,1.0,Nemzeti Bajnokság,12,12,11
+Hungary,2.0,Nemzeti Bajnokság II.,16,7,7
+Italy,1.0,Serie A,20,20,20
+Italy,2.0,Serie B,20,20,19
+Italy,3.0,Serie C - Girone A,20,18,15
+Italy,3.0,Serie C - Girone B,20,19,16
+Italy,3.0,Serie C - Girone C,20,18,16
+Italy,4.0,Serie D - Girone A,1,1,0
+Italy,4.0,Serie D - Girone B,5,5,2
+Italy,4.0,Serie D - Girone C,6,5,3
+Italy,4.0,Serie D - Girone D,6,6,3
+Italy,4.0,Serie D - Girone E,6,5,3
+Italy,4.0,Serie D - Girone F,7,4,3
+Italy,4.0,Serie D - Girone G,2,2,0
+Italy,4.0,Serie D - Girone H,6,4,4
+Italy,4.0,Serie D - Girone I,8,6,5
+Liechtenstein,2.0,Challenge League,1,1,1
+Mexico,1.0,Liga MX Apertura,18,18,17
+Mexico,2.0,Liga de Expansión MX Apertura,15,3,3
+Monaco,1.0,Ligue 1,1,1,1
+Netherlands,1.0,Eredivisie,18,18,18
+Netherlands,2.0,Keuken Kampioen Divisie,20,18,18
+Netherlands,3.0,Tweede Divisie,1,0,0
+Netherlands,4.0,Derde Divisie B,1,0,0
+New Zealand,1.0,A-League Men,2,2,2
+Poland,1.0,PKO BP Ekstraklasa,18,18,18
+Poland,2.0,Betclic 1 Liga,10,10,10
+Poland,3.0,Betclic 2 Liga,3,3,3
+Poland,4.0,Betclic 3 Liga - Group I,2,1,1
+Poland,4.0,Betclic 3 Liga - Group III,1,1,1
+Poland,4.0,Betclic 3 Liga - Group IV,1,0,0
+Portugal,1.0,Liga Portugal,18,18,15
+Portugal,2.0,Liga Portugal 2,18,17,16
+Portugal,3.0,Liga 3,10,7,5
+Portugal,4.0,Campeonato de Portugal - Série A,1,1,0
+Portugal,4.0,Campeonato de Portugal - Série B,4,3,1
+Portugal,4.0,Campeonato de Portugal - Série C,1,1,1
+Portugal,4.0,Campeonato de Portugal - Série D,1,1,0
+Qatar,1.0,Qatar Stars League,12,11,11
+Russia,1.0,Premier Liga,16,16,16
+Russia,2.0,1.Division,8,8,8
+Scotland,1.0,Scottish Premiership,12,12,12
+Scotland,2.0,Scottish Championship,4,4,4
+Scotland,3.0,Scottish League One,2,2,2
+Slovakia,1.0,Niké Liga,12,12,11
+Slovakia,2.0,MONACObet liga,7,4,4
+Spain,1.0,LaLiga,20,20,20
+Spain,2.0,LaLiga2,21,20,20
+Spain,3.0,Primera Federación - Grupo I,20,17,17
+Spain,3.0,Primera Federación - Grupo II,20,16,14
+Spain,4.0,Segunda Federación - Grupo I,2,0,0
+Spain,4.0,Segunda Federación - Grupo II,5,2,2
+Spain,4.0,Segunda Federación - Grupo III,4,2,2
+Spain,4.0,Segunda Federación - Grupo IV,8,4,4
+Spain,4.0,Segunda Federación - Grupo V,4,4,3
+Switzerland,1.0,Super League,12,12,12
+Switzerland,2.0,Challenge League,9,9,7
+Switzerland,3.0,Promotion League,3,3,3
+Switzerland,4.0,1. Liga Classic group 2,4,2,2
+Switzerland,4.0,1. Liga Classic group 3,1,1,1
+Switzerland,5.0,2. Liga interregional - Gruppe 4,1,0,0
+Türkiye,1.0,Süper Lig,18,18,17
+Türkiye,2.0,1.Lig,20,15,7
+Türkiye,3.0,2.Lig Beyaz,7,6,5
+Türkiye,3.0,2.Lig Kirmizi,6,4,3
+Türkiye,4.0,3.Lig Grup 1,1,0,0
+Türkiye,4.0,3.Lig Grup 2,1,0,0
+Türkiye,4.0,3.Lig Grup 3,3,1,1
+Türkiye,4.0,3.Lig Grup 4,6,3,3
+Ukraine,1.0,Premier Liga,16,16,13
+Ukraine,2.0,Persha Liga,5,5,3
+Wales,2.0,Championship,2,2,2
+Wales,3.0,League One,1,1,1

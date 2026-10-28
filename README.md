@@ -78,3 +78,11 @@ Where a club has several values for one field (for example two stadiums), they a
 3. [`scripts/merge_world.py`](scripts/merge_world.py) merges them into one row per club. To rebuild the table, run `python scripts/merge_world.py`, which needs pandas.
 
 Check: the German subset of this table matches a separate Wikidata Query Service export exactly (2,470 clubs), which shows that none of the downloads were cut short.
+
+## Work in progress: how complete is the list?
+
+We're checking how many clubs a country *should* have against how many are in this list.
+
+- [`data/coverage/`](data/coverage) compares each country's 2025/26 league clubs on Transfermarkt with this list, for 29 countries. Clubs are matched by Transfermarkt ID, so the "in list" figures are a minimum. The script is [`scripts/coverage_tm.py`](scripts/coverage_tm.py). It needs the Transfermarkt open data from [salimt/football-datasets](https://github.com/salimt/football-datasets) in `data/raw/`.
+- [`scripts/fetch_api_football.py`](scripts/fetch_api_football.py) downloads every men's league and its teams from [API-Football](https://www.api-football.com). On the free plan this covers the 2024 season at about 95 requests a day. You need your own key, and the raw downloads aren't shared here.
+- [`queries/world/5_league_sizes.rq`](queries/world/5_league_sizes.rq) lists every football league in Wikidata with its number of teams. It hasn't been tested yet.

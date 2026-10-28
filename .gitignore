@@ -1,1 +1,4 @@
 __pycache__/
+# API-Football: private key and raw downloads (their terms don't allow sharing raw data)
+api_football_key.txt
+data/incoming/api_football/

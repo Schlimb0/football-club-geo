@@ -1,0 +1,14 @@
+# GeoBaller world query 5: every association football league in Wikidata (Q15991303) with its country, size and level. Run on QLever Wikidata.
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?league ?league_name ?country ?country_name ?participants ?level ?class_name ?dissolved WHERE {
+  ?league wdt:P31 ?type . ?type wdt:P279* wd:Q15991303 .
+  ?league wdt:P17 ?country .
+  OPTIONAL { ?league wdt:P1132 ?participants . }
+  OPTIONAL { ?league wdt:P3983 ?level . }
+  OPTIONAL { ?league wdt:P2094 ?class . ?class rdfs:label ?class_name . FILTER(LANG(?class_name) = "en") }
+  OPTIONAL { ?league wdt:P576 ?dissolved . }
+  OPTIONAL { ?league rdfs:label ?league_name . FILTER(LANG(?league_name) = "en") }
+  OPTIONAL { ?country rdfs:label ?country_name . FILTER(LANG(?country_name) = "en") }
+}
