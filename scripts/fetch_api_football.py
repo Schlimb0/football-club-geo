@@ -37,11 +37,20 @@ FALLBACK_SEASONS = [2023, 2022]
 SKIP_WORDS = ("women", "female", "fem", "u17", "u18", "u19", "u20", "u21", "u23", "youth", "reserve", "futsal", "beach")
 
 
-def get(path, key):
+def get(path, key, tries=4):
+    # The server sometimes drops the connection; wait and retry instead of stopping the whole run.
     req = urllib.request.Request(BASE + path, headers={"x-apisports-key": key})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        remaining = r.headers.get("x-ratelimit-requests-remaining")
-        return json.load(r), remaining
+    for attempt in range(1, tries + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                remaining = r.headers.get("x-ratelimit-requests-remaining")
+                return json.load(r), remaining
+        except (OSError, ValueError) as e:  # dropped connection, timeout, or a garbled reply
+            if attempt == tries:
+                raise
+            wait = 15 * attempt
+            print(f"  connection problem ({e.__class__.__name__}), retrying in {wait}s...")
+            time.sleep(wait)
 
 
 def log(row):
@@ -117,5 +126,5 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except urllib.error.URLError as e:
+    except OSError as e:  # includes URLError and dropped connections
         sys.exit(f"Network problem: {e}. Check your connection and run again; nothing is lost.")
