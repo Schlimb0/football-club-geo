@@ -91,6 +91,8 @@ def main():
             continue
         if any(w in lg["name"].lower() for w in SKIP_WORDS):
             continue
+        if not any(2022 <= s["year"] <= MAX_SEASON for s in item["seasons"]):
+            continue  # no season the free plan can see (e.g. leagues only covered from 2025): don't spend a request
         current = [s["year"] for s in item["seasons"] if s.get("current")] or [max(s["year"] for s in item["seasons"])]
         todo.append((country, lg["id"], lg["name"], current[0]))
     todo.sort()
