@@ -98,7 +98,8 @@ canvas.map{width:100%;height:190px;border-radius:12px;border:1px solid var(--lin
 .ans.no{background:var(--no);color:#fff}
 .ans.yes{background:var(--yes);color:#fff}
 .ans.skip{background:var(--skip);color:var(--skip-ink);padding-inline:16px}
-.subbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:.85rem;color:var(--muted)}
+.subbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:.85rem;color:var(--muted)}
+.subbar .btn{color:var(--ink);font-size:1rem;padding:11px 18px}
 .linkbtn{background:none;border:0;padding:0;color:var(--pitch);font-weight:600;text-decoration:underline}
 .done{text-align:center;padding:40px 18px}
 .toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 14px;border-radius:10px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none;max-width:calc(100% - 32px)}
@@ -139,7 +140,7 @@ canvas.map{width:100%;height:190px;border-radius:12px;border:1px solid var(--lin
       <button class="ans skip" id="ansU" type="button">Not sure<small>skip ↑</small></button>
       <button class="ans yes" id="ansR" type="button"></button>
     </div>
-    <div class="subbar"><button class="linkbtn" id="undoBtn" type="button">Undo last</button><span>Swipe the card, tap a button, or use ← ↑ → on a keyboard</span></div>
+    <div class="subbar"><button class="btn" id="undoBtn" type="button">↶ Undo last swipe</button><span>Swipe the card, tap a button, or use ← ↑ → on a keyboard</span></div>
   </section>
 </div>
 <div class="toast" id="toast" role="status"></div>
@@ -203,11 +204,9 @@ function connectDb(){
     db=d;
     db.collection("swipes").onSnapshot(snap=>{
       clearTimeout(timer);
-      const seen=new Set();
-      for(const doc of snap.docs){const v=doc.data(); if(v&&v.key){decisions.set(v.key,{decision:v.decision,decided_at:v.decided_at}); seen.add(v.key)}}
-      for(const ch of snap.docChanges()) if(ch.type==="removed"){const v=ch.doc.data(); if(v&&v.key) decisions.delete(v.key)}
-      // answers made before the store connected: send them up once
-      for(const [k,v] of decisions) if(!seen.has(k)) write(k,v);
+      // the account copy is the record: replace whatever this browser had
+      decisions.clear();
+      for(const doc of snap.docs){const v=doc.data(); if(v&&v.key) decisions.set(v.key,{decision:v.decision,decided_at:v.decided_at})}
       saveLocal();
       $("saveState").textContent="Answers save to your account as you go.";
       if(!$("home").hidden) renderHome(); else updateProgress();
@@ -225,7 +224,13 @@ function decide(key,decision){
   decisions.set(key,v); undoStack.push(key); saveLocal(); write(key,v);
 }
 function undo(){
-  const key=undoStack.pop(); if(!key){toast("Nothing to undo");return}
+  let key=undoStack.pop();
+  while(key && !decisions.has(key)) key=undoStack.pop();
+  if(!key){ // after a reload: undo the most recent answer
+    let best=null; for(const [k,v] of decisions) if(!best||v.decided_at>best[1].decided_at) best=[k,v];
+    key=best?.[0];
+  }
+  if(!key){toast("Nothing to undo");return}
   decisions.delete(key); saveLocal(); write(key,null);
   const m=key.split(":")[0];
   if(m!==mode){openMode(m)} else {const c=CARDS[mode].find(c=>c.key===key); queue.unshift(c); next(c)}
