@@ -6,7 +6,7 @@ There is one row per club. Where Wikidata has a location for the club, its stadi
 
 - **File:** [`data/processed/world_clubs_raw.csv`](data/processed/world_clubs_raw.csv) (UTF-8, about 12 MB)
 - **Source:** Wikidata, queried with [QLever](https://qlever.cs.uni-freiburg.de/wikidata) on 2026-10-26
-- **Licence:** CC0 1.0. The data comes from Wikidata, which is also CC0.
+- **Licence:** CC0 1.0. The data comes from Wikidata, which is also CC0. The cleaned and located table adds some columns under other open licences; see [Licences and credits](#licences-and-credits).
 
 ## This is raw data
 
@@ -78,6 +78,50 @@ Where a club has several values for one field (for example two stadiums), they a
 3. [`scripts/merge_world.py`](scripts/merge_world.py) merges them into one row per club. To rebuild the table, run `python scripts/merge_world.py`, which needs pandas.
 
 Check: the German subset of this table matches a separate Wikidata Query Service export exactly (2,470 clubs), which shows that none of the downloads were cut short.
+
+## Cleaned and located table
+
+[`data/processed/world_clubs_located.csv`](data/processed/world_clubs_located.csv) is the same 46,964 clubs, with flags and a best location for each club. Nothing is deleted: clubs that are left out of the study are marked `excluded`, with the reason.
+
+**Status** (`status`, `exclude_reason`, `review_reason`):
+
+| Status | Clubs | Meaning |
+|---|---|---|
+| `excluded` | 5,656 | Defunct (has a dissolved date or a "defunct" type), national teams, reserve or youth sides (has a parent club, or the name ends in B/II/III or contains U21, Reserves and so on), and beach soccer clubs. Women's clubs are kept. |
+| `ok_for_mapping` | 25,229 | Has a name, a country and a location |
+| `needs_review` | 16,079 | Something is missing or unclear. `review_reason` says what: `no_location`, `no_country`, `no_name` or `maybe_reserve_youth` (names with words like Academy or Youth, which real clubs also use) |
+
+**Location** (`loc_lat`, `loc_lon`, `loc_method`, `loc_precision`, `loc_detail`). Every location is tagged with how it was found:
+
+| `loc_method` | Kept clubs | Precision | Where the point comes from |
+|---|---|---|---|
+| `wikidata_club` | 2,909 | ground | The club's own coordinate on Wikidata |
+| `wikidata_venue` | 8,612 | ground | Its home ground's coordinate on Wikidata |
+| `wikidata_place` | 3,455 | town | The town or area Wikidata says it is in |
+| `overture_exact` | 3,339 | ground | A place in [Overture Maps](https://overturemaps.org) whose name exactly matches the club's in the same country, after removing words like FC or Club. `loc_detail` names the place |
+| `geonames_town` | 7,412 | town | A town named in the club's name (for example "FC Schepdaal" → Schepdaal), found in [GeoNames](https://www.geonames.org) in the club's country. Used only when exactly one town fits |
+| blank | 15,581 | | No location found yet |
+
+Checks against clubs whose ground was already on Wikidata: Overture exact matches were within 5 km of it 83% of the time, and the GeoNames town was within 10 km 86% of the time.
+
+`country_iso` and `country_method` give the club's country: `wikidata`, or `nearest_town` for 214 clubs where Wikidata had no country, filled from the nearest GeoNames town to the club's location.
+
+[`data/processed/overture_matches.csv`](data/processed/overture_matches.csv) lists every Overture match, including the uncertain ones (`match_type` = `iffy`, 2,113 clubs with no location), with the top candidates for a person to check.
+
+### How it was built
+
+1. [`scripts/flag_clubs.py`](scripts/flag_clubs.py) adds the flags, giving `world_clubs_flagged.csv`.
+2. [`scripts/fetch_overture_football.py`](scripts/fetch_overture_football.py) reads the Overture Maps places release (2026-10-21.0) from its public S3 bucket and keeps about 2.8 million places that may be football-related. The download isn't stored here because it's too large; run the script to rebuild it (needs pyarrow).
+3. [`scripts/match_overture.py`](scripts/match_overture.py) matches clubs to those places by name and country (needs rapidfuzz and geonamescache).
+4. [`scripts/locate_clubs.py`](scripts/locate_clubs.py) picks each club's location in the order of the table above and recomputes the status.
+
+## Licences and credits
+
+- Data from Wikidata (everything in `world_clubs_raw.csv`) is CC0 1.0.
+- Columns that come from Overture Maps (the `overture_exact` locations, `loc_detail` for those rows, and the `ov_*` columns in `overture_matches.csv`) are under the [CDLA-Permissive-2.0](https://cdla.dev/permissive-2-0/) licence. © Overture Maps Foundation.
+- Locations and countries that come from GeoNames (`geonames_town`, `nearest_town`) are under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Data from GeoNames (geonames.org), used through the geonamescache package.
+
+So the CC0 licence in [`LICENSE`](LICENSE) covers the Wikidata data only. Please give the credits above if you reuse the Overture or GeoNames columns.
 
 ## Work in progress: how complete is the list?
 

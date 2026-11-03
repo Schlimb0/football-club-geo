@@ -2,3 +2,5 @@ __pycache__/
 # API-Football: private key and raw downloads (their terms don't allow sharing raw data)
 api_football_key.txt
 data/incoming/api_football/
+# Overture Maps download (about 460 MB, over GitHub limits; rebuild with scripts/fetch_overture_football.py)
+data/incoming/overture/
